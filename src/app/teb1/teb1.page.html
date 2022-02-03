@@ -1,0 +1,65 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-menu-button color="light" autoHide="false"></ion-menu-button>
+        </ion-buttons>
+        <ion-title style="margin-right:50px;" class="title" class="ion-text-center">
+            Home
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid>
+        <ion-row>
+            <ion-col size="12">
+                <ion-img src="../../assets/imgs/banner1.png"></ion-img>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <hr class="new4">
+
+    <h1 style="color: #4d4dff;text-align: center;">Latest Posts</h1>
+
+    <ion-grid tappable>
+        <ion-row>
+            <ion-col [routerLink]="['/division']" [ngStyle]="{'background-position': 'center top','background-repeat': 'no-repeat','background-size': 'cover','max-width': '100%', 'height': 'auto'}" style="max-width: 100%;height: auto;" class="news">
+                <ion-img src="../../assets/icon/banner.png"></ion-img>
+                <h1 class="banner ion-text-center">
+                    Long division and the various levels of algebra
+                </h1>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <!-- <ion-footer> -->
+    <ion-grid>
+        <ion-row>
+            <ion-col size="4" no-padding [routerLink]="['/addstock']">
+                <ion-card>
+                    <br>
+                    <img src="../../assets/imgs/dashboard/accounting.png">
+                    <h3>Add Stock</h3>
+                </ion-card>
+            </ion-col>
+
+            <ion-col size="4" no-padding [routerLink]="['/addstock']">
+                <ion-card>
+                    <br>
+                    <img src="../../assets/imgs/dashboard/acquisition.png">
+                    <h3>Sell Stock</h3>
+                </ion-card>
+            </ion-col>
+
+            <ion-col size="4" no-padding [routerLink]="['/financial-summary']">
+                <ion-card>
+                    <br>
+                    <img src="../../assets/imgs/dashboard/financial-presentation.png">
+                    <h3>Financial Summary</h3>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <!-- </ion-footer> -->
+
+</ion-content>
