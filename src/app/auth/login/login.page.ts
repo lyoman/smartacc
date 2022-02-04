@@ -15,6 +15,7 @@ export class LoginPage implements OnInit {
   user = { username: '', password: ''};
 
   loading: any;
+  token: any;
 
   who = "";
   error: any;
@@ -45,8 +46,15 @@ export class LoginPage implements OnInit {
       // this.loading.presentLoading();
       this.loading = true;
       this.authService.login('token/', this.user).subscribe((res) => {
-        localStorage.setItem('token', res.access_token);
-        console.log("decoded token", jwt_decode(res.access_token));
+        // localStorage.setItem('token', res.access_token);
+        // console.log("decoded token", jwt_decode(res.access_token));
+        this.token = jwt_decode(res.token);
+
+        console.log(" this.token",  this.token);
+
+        localStorage.setItem('user_id', JSON.stringify(this.token['user_id']));
+        localStorage.setItem('username', JSON.stringify(this.token['username']));
+        localStorage.setItem('email', JSON.stringify(this.token['email']));
         // var token = "eyJ0eXAiO.../// jwt token";
 // var decoded = jwt_decode(token);
         localStorage.setItem('loggedIn', 'true');

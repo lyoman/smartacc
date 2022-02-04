@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavigateDataService } from './../../services/navigate-data.service';
 
 @Component({
   selector: 'app-sellstock-view',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SellstockViewPage implements OnInit {
 
-  constructor() { }
+  sold: any;
+
+  constructor(
+    private navData: NavigateDataService,
+  ) { }
 
   ngOnInit() {
+    this.sold = this.navData.getParamData();
+    console.log('sold', this.sold);
   }
 
 }

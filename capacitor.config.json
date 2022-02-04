@@ -1,6 +1,6 @@
 {
-    "appId": "com.yourfamilyclinic.www",
-    "appName": "Self Monitoring",
+    "appId": "com.smartaccounting.pythonanywhere.www",
+    "appName": "Smart Accounting",
     "bundledWebRuntime": false,
     "npmClient": "npm",
     "webDir": "www",
