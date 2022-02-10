@@ -8,10 +8,9 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { AddstockPipe } from './addstock.pipe';
 
 @NgModule({
-  declarations: [AppComponent, AddstockPipe],
+  declarations: [AppComponent],
   entryComponents: [],
   imports: [
     BrowserModule,

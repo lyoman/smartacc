@@ -16,22 +16,22 @@ export class AppComponent implements OnInit {
     },
     {
       title: 'Add Stock',
-      url: '/help',
+      url: '/addstock/addstock-new',
       icon: 'paper-plane'
     },
     {
       title: 'Sell Stock',
-      url: '/help',
+      url: '/sellstock/sellstock-new',
       icon: 'archive'
     },
     {
       title: 'Financial Summary',
-      url: '/help',
+      url: '/financial-summary',
       icon: 'book'
     },
     {
       title: 'Profile',
-      url: '/help',
+      url: '/tebs/teb3',
       icon: 'play'
     },
     {

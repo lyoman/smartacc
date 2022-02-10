@@ -35,28 +35,12 @@ export class FinancialSummaryPage implements OnInit {
   totalQuantityBought: any;
 
   bought = [];
-  sold = [];
+  sold: any = [];
 
   plt: string;
   localhost:string = '';
 
   boughtStock = [];
-
-  web_get_unrestricted = 0;
-  web_post_unrestricted = 0;
-  web_put_unrestricted = 0;
-  web_delete_unrestricted = 0;
-
-  android_get_unrestricted = 0;
-  android_post_unrestricted = 0;
-  android_put_unrestricted = 0;
-  android_delete_unrestricted = 0;
-  
-  ios_get_unrestricted = 0;
-  ios_post_unrestricted = 0;
-  ios_put_unrestricted = 0;
-  ios_delete_unrestricted = 0;
-  // More variables for restricted API calls
 
   constructor(
     private platform: Platform,
@@ -65,88 +49,85 @@ export class FinancialSummaryPage implements OnInit {
     private alertController: AlertController,
     private navData: NavigateDataService
     ) {
-    this.plt = this.platform.is('mobileweb') ? 'web' :
-      this.platform.is('ios') ? 'ios' : 'android'
-      this.localhost ="smartaccounting.pythonanywhere.com/api/"
+
   }
 
   ngOnInit() {
+    // this.get();
     this.get();
   }
 
 
   get() {
     this.loading = true;
-    Http.request({ url: `https://${this.localhost}new_stock/new_stock/?user=${JSON.parse(localStorage.getItem('user_id'))}`, method: 'GET' })
-      .then(async response => {
-        if (response.status === 200) {
-          const data = await response.data['results'];
-          console.log('all added stock', data);
+    this.apiService.getUsers1("new_stock/new_stock/?user="+JSON.parse(localStorage.getItem('user_id'))).subscribe (data => {
+      console.log("data", data["results"]);
+      this.bought = data["results"];
+      // data = data["results"];
+      this.totalStockOrdered = this.bought.length;
 
-          this.bought = data;
-          // data = data['results'];
-          this.totalStockOrdered = data.length;
-    
-          const sumall = data.map(item => parseInt(item.amount)).reduce((prev, curr) => prev + curr, 0);
-          console.log('amount bought',sumall);
-    
-          this.totalAmountBought = sumall;
-    
-    
-          const sumall1 = data.map(item => parseInt(item.quantity)).reduce((prev, curr) => prev + curr, 0);
-          console.log('quantity bought', sumall1);
-    
-          this.totalQuantityBought = sumall1;
-          console.log(this.boughtStock);
-          this.getSoldStock();
-          this.loading = false;
-          this.changeStatus('get', 'unrestricted', 1);
-        }
-      })
-      .catch(e => {
-        console.log(e)
-        this.loading = false;
-        this.changeStatus('get', 'unrestricted', 2);
-      })
+
+      const sumall = this.bought.map(item => parseInt(item.amount)).reduce((prev, curr) => prev + curr, 0);
+      console.log('amount bought',sumall);
+
+      this.totalAmountBought = sumall;
+
+
+      const sumall1 = this.bought.map(item => parseInt(item.quantity)).reduce((prev, curr) => prev + curr, 0);
+      console.log('quantity bought', sumall1);
+
+      this.totalQuantityBought = sumall1;
+      console.log(this.boughtStock);
+      this.get3();
+
+      this.loading = false;
+      console.log(this.bought);
+    }, (err) => {
+      console.log(err);
+      this.loading = false;
+      this.presentAlert(err.message);
+    });
   }
 
-  getSoldStock() {
-    this.loading = true;
-    Http.request({ url: `https://${this.localhost}new_stock/sold_stock_user/?user=${JSON.parse(localStorage.getItem('user_id'))}`, method: 'GET' })
-      .then(async response => {
-        if (response.status === 200) {
-          const data = await response.data;
-          this.loading1 = false;
-          console.log('user sold stock', data);
-          this.sold = data;
-    
-          this.totalStockSold = data.length;
-    
-          const sumall = data.map(item => parseInt(item.amount)).reduce((prev, curr) => prev + curr, 0);
-          console.log(sumall);
-    
-          this.totalAmountSold = sumall;
-    
-    
-          const sumall1 = data.map(item => parseInt(item.quantity)).reduce((prev, curr) => prev + curr, 0);
-          console.log(sumall1);
-    
-          this.totalQuantitySold = sumall1;
-    
-          this.profitloss = (this.totalAmountSold - this.totalAmountBought);
-          console.log("this.profitloss", this.profitloss);
-          this.changeStatus('get', 'unrestricted', 1);
-        }
-      })
-      .catch(e => {
-        console.log(e)
-        this.loading = false;
-        this.changeStatus('get', 'unrestricted', 2);
-      })
+
+  get3() {
+    this.apiService.getUsers1("new_stock/sold_stock_user/?user="+JSON.parse(localStorage.getItem('user_id'))).subscribe (data => {
+      console.log('res', data);
+      console.log('all added stock', data);
+
+      this.loading1 = false;
+      console.log('user sold stock', data);
+      this.sold = data;
+
+      this.totalStockSold = this.sold.length;
+
+      const sumall = this.sold.map(item => parseInt(item.amount)).reduce((prev, curr) => prev + curr, 0);
+      console.log(sumall);
+
+      this.totalAmountSold = sumall;
+
+
+      const sumall1 = this.sold.map(item => parseInt(item.quantity)).reduce((prev, curr) => prev + curr, 0);
+      console.log(sumall1);
+
+      this.totalQuantitySold = sumall1;
+
+      this.profitloss = (this.totalAmountSold - this.totalAmountBought);
+      console.log("this.profitloss", this.profitloss);
+    }, (err) => {
+      console.log(err);
+      this.loading = false;
+      // this.presentAlert(err.message);
+    })
   }
 
-  changeStatus(type, restriction, status) {
-    this[`${this.plt}_${type}_${restriction}`] = status
+
+  presentAlert(err) {
+    const alert = this.alertController.create({
+    header: 'Unable to retrive data!',
+    message: err,
+    subHeader: 'Network error, pliz try again',
+    buttons: ['Dismiss']}).then(alert=> alert.present());
   }
 
 }

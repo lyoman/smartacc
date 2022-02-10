@@ -13,7 +13,7 @@ const routes: Routes = [
     loadChildren: () => import('./addstock-new/addstock-new.module').then( m => m.AddstockNewPageModule)
   },
   {
-    path: 'addstock-view',
+    path: 'addstock-view/:id',
     loadChildren: () => import('./addstock-view/addstock-view.module').then( m => m.AddstockViewPageModule)
   }
 ];

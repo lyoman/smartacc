@@ -17,12 +17,9 @@
                 <ion-thumbnail slot="start">
                     <img src="../../assets/imgs/dashboard/accounting.png">
                 </ion-thumbnail>
-                <!-- <ion-thumbnail slot="start" *ngIf="user.image == null">
-              <img src="../../assets/imgs/noimage.png">
-          </ion-thumbnail> -->
 
                 <ion-label>
-                    <h1>{{ user.name }}</h1>
+                    <h1>{{ user.name }} | ${{ user.amount }}</h1>
                     <h2 style="white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;">{{ user.description }}</h2>

@@ -28,6 +28,9 @@ export class LoginPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    if(localStorage.getItem("token") != null) {
+      this.router.navigateByUrl('/home');
+    }
   }
 
   guest() {
@@ -45,7 +48,7 @@ export class LoginPage implements OnInit {
     else {
       // this.loading.presentLoading();
       this.loading = true;
-      this.authService.login('token/', this.user).subscribe((res) => {
+      this.authService.login('/auth/token/', this.user).subscribe((res) => {
         // localStorage.setItem('token', res.access_token);
         // console.log("decoded token", jwt_decode(res.access_token));
         this.token = jwt_decode(res.token);
@@ -60,11 +63,12 @@ export class LoginPage implements OnInit {
         localStorage.setItem('loggedIn', 'true');
         console.log(res);
         this.loading = false;
-        if(this.who == 'user') {
-          this.navCtrl.navigateRoot('home');
-        } else {
-          this.navCtrl.navigateRoot('tebs');
-        }
+        this.navCtrl.navigateRoot('home');
+        // if(this.who == 'user') {
+        //   this.navCtrl.navigateRoot('home');
+        // } else {
+        //   this.navCtrl.navigateRoot('tebs');
+        // }
       }, (err) => {
         console.log(err);
         this.error = err;

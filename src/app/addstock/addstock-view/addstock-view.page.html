@@ -29,4 +29,35 @@
         </ion-card-content>
     </ion-card>
 
+
+    <h2 style="color:#2A1770;" text-center>Sold Stock Details</h2>
+    <div *ngIf="!loading2" class="text text-center myloader">
+        <ion-card *ngIf="sold">
+            <ion-card-header>
+                <h3 style="color:black; font-size:19px;">Total Quantity Left: {{ bought.quantity - totalQuantitySold }}</h3>
+            </ion-card-header>
+            <ion-card-content>
+                <!-- <p> -->
+                <h3 style="color:black; font-size:17px;">Total Quantity Sold: {{ totalQuantitySold }}</h3>
+                <h3 style="color:black; font-size:17px;">Total Amount Sold: {{ totalAmount }}</h3>
+                <hr>
+
+                <p style="color:black;" *ngIf="profitloss <= 0">
+                    <ion-label style="background-color: red; font-weight: bold;color: white">Loss: $ {{ profitloss * -1 }}</ion-label>
+                </p>
+
+                <p style="color:black;" *ngIf="profitloss > 0">
+                    <ion-label style="background-color: green;">Loss: $ {{ profitloss }}</ion-label>
+                </p>
+            </ion-card-content>
+        </ion-card>
+    </div>
+
+    <div *ngIf="loading2" class="text text-center myloader">
+        <img height="200" width="auto" src="assets/images/tenor.gif">
+        <div class="text">
+            Loading....
+        </div>
+    </div>
+
 </ion-content>

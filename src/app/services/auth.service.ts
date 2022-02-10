@@ -7,11 +7,15 @@ import {Observable} from 'rxjs';
 })
 export class AuthService {
 
-  AUTH_SERVER_ADDRESS:  string  =  'http://smartaccounting.pythonanywhere.com/api/auth/';
+  AUTH_SERVER_ADDRESS:  string  =  'http://smartaccounting.pythonanywhere.com/api/';
 
   constructor(private httpClient: HttpClient) { }
 
   login(url, userData): Observable<any> {
+    return this.httpClient.post(`${this.AUTH_SERVER_ADDRESS}${url}`, userData, { headers: { 'Content-Type': 'application/json' } });
+  }
+
+  register(url, userData): Observable<any> {
     return this.httpClient.post(`${this.AUTH_SERVER_ADDRESS}${url}`, userData, { headers: { 'Content-Type': 'application/json' } });
   }
 }

@@ -1,13 +1,13 @@
 {
-    "appId": "com.smartaccounting.pythonanywhere.www",
-    "appName": "Smart Accounting",
-    "bundledWebRuntime": false,
-    "npmClient": "npm",
-    "webDir": "www",
-    "plugins": {
-        "SplashScreen": {
-            "launchShowDuration": 0
-        }
-    },
-    "cordova": {}
+	"appId": "com.smartaccounting.pythonanywhere.www",
+	"appName": "Smart Accounting",
+	"bundledWebRuntime": false,
+	"npmClient": "npm",
+	"webDir": "www",
+	"plugins": {
+		"SplashScreen": {
+			"launchShowDuration": 0
+		}
+	},
+	"cordova": {}
 }

@@ -1,7 +1,7 @@
 <ion-header>
     <ion-toolbar color="primary">
         <ion-buttons slot="start">
-            <ion-back-button autoHide="false"></ion-back-button>
+            <ion-back-button slot="start"></ion-back-button>
         </ion-buttons>
         <ion-title class="title" style="margin-right: 50px;" class="ion-text-center">
             Financial Summary
@@ -33,8 +33,8 @@
 
     </div>
 
-    <div *ngIf="loading" class="text text-center myloader">
-        <img height="200" width="auto" src="assets/images/tenor.gif">
+    <div *ngIf="loading" class="text ion-text-center myloader">
+        <img height="200" width="auto" src="assets/imgs/tenor.gif">
         <div class="text">
             Loading....
         </div>
@@ -62,8 +62,8 @@
 
     </div>
 
-    <div *ngIf="loading1" class="text text-center myloader">
-        <img height="200" width="auto" src="assets/images/tenor.gif">
+    <div *ngIf="loading1" class="text ion-text-center myloader">
+        <img height="200" width="auto" src="assets/imgs/tenor.gif">
         <div class="text">
             Loading....
         </div>

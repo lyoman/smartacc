@@ -1,4 +1,4 @@
-package com.yourfamilyclinic.www;
+package com.snartaccounting.www;
 
 import android.os.Bundle;
 

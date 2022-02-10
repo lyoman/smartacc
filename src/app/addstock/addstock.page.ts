@@ -18,22 +18,6 @@ export class AddstockPage implements OnInit {
 
   boughtStock = [];
 
-  web_get_unrestricted = 0;
-  web_post_unrestricted = 0;
-  web_put_unrestricted = 0;
-  web_delete_unrestricted = 0;
-
-  android_get_unrestricted = 0;
-  android_post_unrestricted = 0;
-  android_put_unrestricted = 0;
-  android_delete_unrestricted = 0;
-  
-  ios_get_unrestricted = 0;
-  ios_post_unrestricted = 0;
-  ios_put_unrestricted = 0;
-  ios_delete_unrestricted = 0;
-  // More variables for restricted API calls
-
   constructor(
     private platform: Platform,
     public router: Router, 
@@ -41,9 +25,7 @@ export class AddstockPage implements OnInit {
     private alertController: AlertController,
     private navData: NavigateDataService
     ) {
-    this.plt = this.platform.is('mobileweb') ? 'web' :
-      this.platform.is('ios') ? 'ios' : 'android'
-      this.localhost ="smartaccounting.pythonanywhere.com/api/"
+
   }
 
   ngOnInit() {
@@ -52,30 +34,30 @@ export class AddstockPage implements OnInit {
 
   get() {
     this.loading = true;
-    Http.request({ url: `https://${this.localhost}new_stock/new_stock/`, method: 'GET' })
-      .then(async response => {
-        if (response.status === 200) {
-          const data = await response.data;
-          this.boughtStock = data['results'];
-          console.log(this.boughtStock);
-          this.loading = false;
-          this.changeStatus('get', 'unrestricted', 1);
-        }
-      })
-      .catch(e => {
-        console.log(e)
-        this.loading = false;
-        this.changeStatus('get', 'unrestricted', 2);
-      })
-  }
-
-  changeStatus(type, restriction, status) {
-    this[`${this.plt}_${type}_${restriction}`] = status
+    this.apiService.getUsers1("new_stock/new_stock/").subscribe (data => {
+      console.log("data", data["results"]);
+      this.boughtStock = data["results"];
+      this.loading = false;
+      console.log(this.boughtStock);
+    }, (err) => {
+      console.log(err);
+      this.loading = false;
+      this.presentAlert(err.message);
+    });
   }
 
   boughtDetail(news){
     this.navData.setParamData(news);
-    this.router.navigateByUrl('/addstock/addstock-view');
+    this.router.navigateByUrl('/addstock/addstock-view/'+news.id);
+  }
+
+
+  presentAlert(err) {
+    const alert = this.alertController.create({
+    header: 'Unable to retrive data!',
+    message: err,
+    subHeader: 'Network error, pliz try again',
+    buttons: ['Dismiss']}).then(alert=> alert.present());
   }
 
 }
