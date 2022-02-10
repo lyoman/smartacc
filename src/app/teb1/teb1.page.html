@@ -10,16 +10,17 @@
 </ion-header>
 
 <ion-content>
-    <!-- <ion-grid>
+    <ion-grid>
         <ion-row>
             <ion-col size="12">
-                <ion-img src="../../assets/imgs/banner1.png"></ion-img>
+                <!-- <ion-img src="../../assets/imgs/banner1.png"></ion-img> -->
+                <h1 style="color: #4d4dff;text-align: center;">Smart Accounting mobile application</h1>
             </ion-col>
         </ion-row>
-    </ion-grid> -->
+    </ion-grid>
     <hr class="new4">
 
-    <h1 style="color: #4d4dff;text-align: center;">Latest Posts</h1>
+    <!-- <h1 style="color: #4d4dff;text-align: center;">Smart Accounting mobile application</h1> -->
 
     <ion-grid tappable>
         <ion-row>
@@ -51,7 +52,7 @@
                 </ion-card>
             </ion-col>
 
-            <ion-col size="4" no-padding [routerLink]="['/financial-summary']">
+            <ion-col size="4" no-padding (click)="financial()">
                 <ion-card>
                     <br>
                     <img src="../../assets/imgs/dashboard/financial-presentation.png">

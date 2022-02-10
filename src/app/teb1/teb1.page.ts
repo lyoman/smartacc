@@ -49,21 +49,6 @@ export class Teb1Page implements OnInit {
     // this.getDate();
   }
 
-  // getDate() {
-  //   this.apiService.get('new_stock/new_stock/').then
-  //   ((res) => {
-  //     console.log(res);
-  //     this.loading = false;
-
-  //   }, (err) => {
-  //     console.log(err);
-  //     // this.error = err;
-  //     // this.loading.dismiss();
-  //     this.loading = false;
-  //     this.presentAlert(err.message);
-  //   });
-  // }
-
 
   get() {
     Http.request({ url: `https://${this.localhost}new_stock/new_stock/`, method: 'GET' })
@@ -159,6 +144,10 @@ export class Teb1Page implements OnInit {
 
   training () {
     this.router.navigateByUrl('/tebs/teb2')
+  }
+
+  financial() {
+    this.router.navigateByUrl('/financial-summary');
   }
 
   presentAlert(err) {

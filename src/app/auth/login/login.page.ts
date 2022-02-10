@@ -28,17 +28,9 @@ export class LoginPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    if(localStorage.getItem("token") != null) {
+    if(JSON.parse(localStorage.getItem("token")) != null) {
       this.router.navigateByUrl('/home');
     }
-  }
-
-  guest() {
-    this.router.navigateByUrl('/guardian');
-  }
-
-  login1() {
-    this.router.navigateByUrl('/home');
   }
 
   login() {
@@ -46,33 +38,25 @@ export class LoginPage implements OnInit {
       this.presentAlert1();
     }
     else {
-      // this.loading.presentLoading();
       this.loading = true;
-      this.authService.login('/auth/token/', this.user).subscribe((res) => {
-        // localStorage.setItem('token', res.access_token);
-        // console.log("decoded token", jwt_decode(res.access_token));
+      this.authService.login('auth/token/', this.user).subscribe((res) => {
+
         this.token = jwt_decode(res.token);
 
-        console.log(" this.token",  this.token);
-
+        console.log("this.token",  this.token);
+        localStorage.setItem('token', JSON.stringify(this.token));
         localStorage.setItem('user_id', JSON.stringify(this.token['user_id']));
         localStorage.setItem('username', JSON.stringify(this.token['username']));
         localStorage.setItem('email', JSON.stringify(this.token['email']));
-        // var token = "eyJ0eXAiO.../// jwt token";
-// var decoded = jwt_decode(token);
+
         localStorage.setItem('loggedIn', 'true');
         console.log(res);
         this.loading = false;
         this.navCtrl.navigateRoot('home');
-        // if(this.who == 'user') {
-        //   this.navCtrl.navigateRoot('home');
-        // } else {
-        //   this.navCtrl.navigateRoot('tebs');
-        // }
+
       }, (err) => {
         console.log(err);
         this.error = err;
-        // this.loading.dismiss();
         this.loading = false;
         this.presentAlert(err.message);
       });
@@ -82,14 +66,6 @@ export class LoginPage implements OnInit {
   register() {
     this.router.navigateByUrl('/register');
   }
-
-  // presentAlert2() {
-  //   const alert = this.alertController.create({
-  //   header: 'Notice',
-  //   message: 'To register, visit the website',
-  //   subHeader: 'website link http://blindstick.herokuapp.com/register',
-  //   buttons: ['Dismiss']}).then(alert=> alert.present());
-  // }
 
   presentAlert(err) {
     const alert = this.alertController.create({
