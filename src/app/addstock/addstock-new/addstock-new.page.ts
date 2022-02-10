@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { AuthService } from './../../services/auth.service';
 import { AlertController, NavController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
@@ -23,7 +24,8 @@ export class AddstockNewPage implements OnInit {
   constructor(
     private alertController: AlertController,
     private authService: AuthService,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -40,8 +42,8 @@ export class AddstockNewPage implements OnInit {
 
         console.log(res);
         this.loading = false;
-        this.navCtrl.navigateRoot('addstock');
-
+        this.router.navigateByUrl('addstock');
+        this.presentAlert5();
       }, (err) => {
         console.log(err);
         this.loading = false;
@@ -63,6 +65,14 @@ export class AddstockNewPage implements OnInit {
     header: 'Error!',
     message: 'Please fill in all fields in order to login',
     subHeader: 'Fill in all fields',
+    buttons: ['Dismiss']}).then(alert=> alert.present());
+  }
+
+  presentAlert5() {
+    const alert = this.alertController.create({
+    header: 'Success!',
+    message: 'You have successfully added your stock',
+    subHeader: 'stocks has been added',
     buttons: ['Dismiss']}).then(alert=> alert.present());
   }
 

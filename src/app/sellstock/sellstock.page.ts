@@ -39,6 +39,9 @@ export class SellstockPage implements OnInit {
       console.log("data", data);
       this.soldStock = data;
       this.loading = false;
+      if(this.soldStock.length == 0) {
+        this.presentAlert3();
+      }
       console.log(this.soldStock);
     }, (err) => {
       console.log(err);
@@ -58,6 +61,14 @@ export class SellstockPage implements OnInit {
     header: 'Unable to retrive data!',
     message: err,
     subHeader: 'Network error, pliz try again',
+    buttons: ['Dismiss']}).then(alert=> alert.present());
+  }
+
+  presentAlert3() {
+    const alert = this.alertController.create({
+    header: 'No saved data!',
+    message: 'You currently have no sold stock in the system',
+    subHeader: 'Sell stock and try again',
     buttons: ['Dismiss']}).then(alert=> alert.present());
   }
 

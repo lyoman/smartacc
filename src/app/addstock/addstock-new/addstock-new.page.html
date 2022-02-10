@@ -15,7 +15,7 @@
 
             <ion-item>
                 <ion-label position="floating" style="color: #1a1aff;">
-                    <ion-icon name="play" item-start class="text-warning"></ion-icon>
+                    <ion-icon name="calendar" item-start class="text-warning"></ion-icon>
                     Date
                 </ion-label>
                 <ion-input type="date" [(ngModel)]="user.date" name="date"></ion-input>
@@ -31,7 +31,7 @@
 
             <ion-item>
                 <ion-label position="floating" style="color: #1a1aff;">
-                    <ion-icon name="person" item-start class="text-warning"></ion-icon>
+                    <ion-icon name="chatbubbles" item-start class="text-warning"></ion-icon>
                     Description (Optional)
                 </ion-label>
                 <ion-input type="text" [(ngModel)]="user.description" name="description"></ion-input>
@@ -39,7 +39,7 @@
 
             <ion-item>
                 <ion-label position="floating" style="color: #1a1aff;">
-                    <ion-icon name="person" item-start class="text-warning"></ion-icon>
+                    <ion-icon name="briefcase" item-start class="text-warning"></ion-icon>
                     Quantity
                 </ion-label>
                 <ion-input type="number" [(ngModel)]="user.quantity" name="Quantity"></ion-input>
@@ -47,7 +47,7 @@
 
             <ion-item>
                 <ion-label position="floating" style="color: #1a1aff;">
-                    <ion-icon name="lock" item-start class="text-warning"></ion-icon>
+                    <ion-icon name="cash" item-start class="text-warning"></ion-icon>
                     Amount (USD)
                 </ion-label>
                 <ion-input type="number" [(ngModel)]="user.amount" name="amount"></ion-input>
@@ -56,7 +56,7 @@
         </form>
 
         <div margin-top>
-            <ion-button class="shary" shape="round" icon-start expand="block" color="warning" tappable>
+            <ion-button class="shary" shape="round" icon-start expand="block" color="warning" tappable (click)="register();">
                 <ion-icon color="light" name="log-in"></ion-icon>
                 <p color="light " style="color: #ffffff; ">Save Stock</p>
             </ion-button>

@@ -14,7 +14,7 @@ export class AddstockViewPage implements OnInit {
   bought: any;
 
   race: any;
-  sold = [];
+  sold: any = [];
   loading = false;
   loading2 = false;
 
@@ -48,7 +48,7 @@ export class AddstockViewPage implements OnInit {
     this.loading2 = true;
     this.apiService.getUsers1("new_stock/sold_stock/?stockname="+id).subscribe (data => {
       console.log("data", data);
-      this.sold = data["results"];
+      this.sold = data;
 
       const sumall = this.sold.map(item => parseInt(item.amount)).reduce((prev, curr) => prev + curr, 0);
       console.log(sumall);

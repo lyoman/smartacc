@@ -58,22 +58,28 @@ export class RegisterPage implements OnInit {
 
 
   register() {
-    if (this.user.first_name == '' || this.user.username == '' || this.user.last_name == '' || this.user.business == '') {
-      this.presentAlert1();
-    }
-    else {
-      this.loading = true;
-      this.authService.register('users/register/', this.user).subscribe((res) => {
-
-        console.log(res);
-        this.loading = false;
-        this.navCtrl.navigateRoot('login');
-
-      }, (err) => {
-        console.log(err);
-        this.loading = false;
-        this.presentAlert(err.message);
-      });
+    if(this.user.password != this.user.cpassword) {
+      this.presentAlert5();
+    } else {
+      if (this.user.first_name == '' || this.user.username == '' || this.user.last_name == '' || this.user.business == '') {
+        this.presentAlert1();
+      }
+      else {
+        this.loading = true;
+        this.authService.register('users/register/', this.user).subscribe((res) => {
+  
+          console.log(res);
+          this.loading = false;
+          
+          this.navCtrl.navigateRoot('login');
+          this.presentAlert7();
+  
+        }, (err) => {
+          console.log(err);
+          this.loading = false;
+          this.presentAlert(err.message);
+        });
+      }
     }
   }
 
@@ -91,6 +97,25 @@ export class RegisterPage implements OnInit {
       header: 'Error!',
       message: 'Please fill in all fields in order to login',
       subHeader: 'Fill in all fields',
+      buttons: ['Dismiss']
+    }).then(alert => alert.present());
+  }
+
+  presentAlert5() {
+    const alert = this.alertController.create({
+      header: 'Passwords Error!',
+      message: 'Verify your passwords and try again',
+      subHeader: 'Passwords did not match',
+      buttons: ['Dismiss']
+    }).then(alert => alert.present());
+  }
+
+  
+  presentAlert7() {
+    const alert = this.alertController.create({
+      header: 'Success!',
+      message: 'Your account has been created, enter your Username and Password to login',
+      subHeader: 'Account Created successfully',
       buttons: ['Dismiss']
     }).then(alert => alert.present());
   }

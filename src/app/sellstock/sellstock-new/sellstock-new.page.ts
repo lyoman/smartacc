@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { ApiService } from './../../services/api.service';
 import { AuthService } from './../../services/auth.service';
 import { AlertController, NavController } from '@ionic/angular';
@@ -29,7 +30,8 @@ export class SellstockNewPage implements OnInit {
     private alertController: AlertController,
     private authService: AuthService,
     private navCtrl: NavController,
-    private apiService: ApiService
+    private apiService: ApiService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -46,7 +48,8 @@ export class SellstockNewPage implements OnInit {
 
         console.log(res);
         this.loading = false;
-        this.navCtrl.navigateRoot('sellstock');
+        this.router.navigateByUrl('sellstock');
+        this.presentAlert5();
 
       }, (err) => {
         console.log(err);
@@ -62,6 +65,11 @@ export class SellstockNewPage implements OnInit {
       this.loading = false;
       console.log('all added stock', data['results']);
       this.userAddded = data['results'];
+
+      if (this.userAddded.length == 0) {
+        this.router.navigateByUrl('addstock/addstock-new');
+        this.presentAlert9();
+      }
     },
       err => {
         console.log(err)
@@ -92,6 +100,22 @@ export class SellstockNewPage implements OnInit {
     header: 'Error!',
     message: 'Please fill in all fields in order to login',
     subHeader: 'Fill in all fields',
+    buttons: ['Dismiss']}).then(alert=> alert.present());
+  }
+
+  presentAlert5() {
+    const alert = this.alertController.create({
+    header: 'Success!',
+    message: 'You have successfully sold your stock',
+    subHeader: 'stocks has been sold',
+    buttons: ['Dismiss']}).then(alert=> alert.present());
+  }
+
+  presentAlert9() {
+    const alert = this.alertController.create({
+    header: 'Warning!',
+    message: 'You have no stock in the system, add stock first to sell',
+    subHeader: 'Add stock first inorder to sell',
     buttons: ['Dismiss']}).then(alert=> alert.present());
   }
 

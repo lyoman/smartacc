@@ -34,10 +34,13 @@ export class AddstockPage implements OnInit {
 
   get() {
     this.loading = true;
-    this.apiService.getUsers1("new_stock/new_stock/").subscribe (data => {
+    this.apiService.getUsers1("new_stock/new_stock/?user="+JSON.parse(localStorage.getItem('user_id'))).subscribe (data => {
       console.log("data", data["results"]);
       this.boughtStock = data["results"];
       this.loading = false;
+      if(this.boughtStock.length == 0) {
+        this.presentAlert3();
+      }
       console.log(this.boughtStock);
     }, (err) => {
       console.log(err);
@@ -57,6 +60,14 @@ export class AddstockPage implements OnInit {
     header: 'Unable to retrive data!',
     message: err,
     subHeader: 'Network error, pliz try again',
+    buttons: ['Dismiss']}).then(alert=> alert.present());
+  }
+
+  presentAlert3() {
+    const alert = this.alertController.create({
+    header: 'No saved data!',
+    message: 'You currently have no stock in the system',
+    subHeader: 'Add stock and try again',
     buttons: ['Dismiss']}).then(alert=> alert.present());
   }
 

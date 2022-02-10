@@ -40,7 +40,7 @@
 
             <ion-item>
                 <ion-label position="floating" style="color: #1a1aff;">
-                    <ion-icon name="person" item-start class="text-warning"></ion-icon>
+                    <ion-icon name="call" item-start class="text-warning"></ion-icon>
                     Phone Number
                 </ion-label>
                 <ion-input type="number" [(ngModel)]="user.phone_number" name="phone_number"></ion-input>
@@ -48,7 +48,7 @@
 
             <ion-item>
                 <ion-label position="floating" style="color: #1a1aff;">
-                    <ion-icon name="person" item-start class="text-warning"></ion-icon>
+                    <ion-icon name="compass" item-start class="text-warning"></ion-icon>
                     Business Name
                 </ion-label>
                 <ion-input type="text" [(ngModel)]="user.business" name="business"></ion-input>
@@ -56,7 +56,7 @@
 
             <ion-item>
                 <ion-label position="floating" style="color: #1a1aff;">
-                    <ion-icon name="person" item-start class="text-warning"></ion-icon>
+                    <ion-icon name="chatbubbles" item-start class="text-warning"></ion-icon>
                     Email
                 </ion-label>
                 <ion-input type="email" [(ngModel)]="user.email" name="email"></ion-input>
@@ -64,7 +64,7 @@
 
             <ion-item>
                 <ion-label position="floating" style="color:#1a1aff;">
-                    <ion-icon name="lock" item-start class="text-warning"></ion-icon>
+                    <ion-icon name="log-in" item-start class="text-warning"></ion-icon>
                     Password
                 </ion-label>
                 <ion-input type="password" [(ngModel)]="user.password" name="password"></ion-input>
@@ -72,7 +72,7 @@
 
             <ion-item>
                 <ion-label position="floating" style="color:#1a1aff;">
-                    <ion-icon name="lock" item-start class="text-warning"></ion-icon>
+                    <ion-icon name="log-in" item-start class="text-warning"></ion-icon>
                     Confirm Password
                 </ion-label>
                 <ion-input type="password" [(ngModel)]="user.cpassword" name="cpassword"></ion-input>
@@ -86,7 +86,7 @@
         </p> -->
 
         <div margin-top>
-            <ion-button class="shary" shape="round" icon-start expand="block" color="warning" tappable>
+            <ion-button class="shary" shape="round" icon-start expand="block" color="warning" tappable (click)="register();">
                 <ion-icon color="light" name="log-in"></ion-icon>
                 <p color="light " style="color: #ffffff; ">Register</p>
             </ion-button>
