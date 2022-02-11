@@ -18,7 +18,7 @@ export class Teb3Page implements OnInit {
 
   bought: any;
 
-  username = JSON.parse(localStorage.getItem("username"))
+  username = JSON.parse(localStorage.getItem("username"));
 
   constructor(
     private platform: Platform,

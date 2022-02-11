@@ -14,6 +14,8 @@ import { ApiService } from '../services/api.service';
 })
 export class Teb1Page implements OnInit {
 
+  username = JSON.parse(localStorage.getItem("username"));
+
   plt: string;
   localhost:string = '';
   loading: any;

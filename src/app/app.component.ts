@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Platform } from '@ionic/angular';
 
@@ -52,6 +53,7 @@ export class AppComponent implements OnInit {
 
   constructor(
     private platform: Platform,
+    private router: Router,
   ) {
     this.initializeApp();
   }
@@ -71,5 +73,9 @@ export class AppComponent implements OnInit {
 
   logout() {
     localStorage.clear();
+  }
+
+  navigateP(url){
+    this.router.navigateByUrl(url);
   }
 }

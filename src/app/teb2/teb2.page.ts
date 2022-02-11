@@ -8,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class Teb2Page implements OnInit {
 
+  username = JSON.parse(localStorage.getItem("username"));
+
   token: any;
   users :any;
   response: any;
