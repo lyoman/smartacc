@@ -12,7 +12,8 @@ export class ApiService {
 
   // constructor() { }
 
-  AUTH_SERVER_ADDRESS:  string  =  'https://smartaccounting.pythonanywhere.com/api/';
+  // AUTH_SERVER_ADDRESS:  string  =  'https://smartaccounting.pythonanywhere.com/api/';
+  AUTH_SERVER_ADDRESS:  string  =  'http://localhost:8000/api/';
 
   plt: string;
   localhost:string = '';
@@ -39,7 +40,8 @@ export class ApiService {
     ) {
       this.plt = this.platform.is('mobileweb') ? 'web' :
       this.platform.is('ios') ? 'ios' : 'android'
-      this.localhost ="smartaccounting.pythonanywhere.com/api/"
+      // this.localhost ="smartaccounting.pythonanywhere.com/api/";
+      this.localhost ="localhost:8000/api/";
      }
 
   login(url, userData) {
